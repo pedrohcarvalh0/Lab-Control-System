@@ -30,10 +30,10 @@
 
 // Variáveis globais
 ssd1306_t ssd;
-SemaphoreHandle_t xUsuariosSem;     // Semáforo de contagem para usuários
-SemaphoreHandle_t xResetSem;        // Semáforo binário para reset
-SemaphoreHandle_t xDisplayMutex;    // Mutex para acesso ao display
-volatile uint8_t usuariosAtivos = 0;         // Contador de usuários ativos
+SemaphoreHandle_t xUsuariosSem;         // Semáforo de contagem para usuários
+SemaphoreHandle_t xResetSem;            // Semáforo binário para reset
+SemaphoreHandle_t xDisplayMutex;        // Mutex para acesso ao display
+volatile uint8_t usuariosAtivos = 0;    // Contador de usuários ativos
 
 // Protótipos de funções
 void atualizarLED(uint8_t usuarios);
@@ -53,8 +53,6 @@ void gpio_reset_callback(uint gpio, uint32_t events)
     }
 }
 
-
-// vTaskEntrada - agora usa xSemaphoreTake no semáforo de contagem para controlar limite
 void vTaskEntrada(void *params)
 {
     while (true)
@@ -174,7 +172,6 @@ void vTaskReset(void *params)
         }
     }
 }
-
 
 // Função para atualizar o LED RGB com base no número de usuários
 void atualizarLED(uint8_t usuarios)
